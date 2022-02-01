@@ -635,6 +635,13 @@
   dependencies:
     "@types/koa" "*"
 
+"@types/koa-router@^7.4.4":
+  version "7.4.4"
+  resolved "https://registry.yarnpkg.com/@types/koa-router/-/koa-router-7.4.4.tgz#db72bde3616365d74f00178d5f243c4fce7da572"
+  integrity sha512-3dHlZ6CkhgcWeF6wafEUvyyqjWYfKmev3vy1PtOmr0mBc3wpXPU5E8fBBd4YQo5bRpHPfmwC5yDaX7s4jhIN6A==
+  dependencies:
+    "@types/koa" "*"
+
 "@types/koa@*", "@types/koa@^2.13.4":
   version "2.13.4"
   resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.13.4.tgz#10620b3f24a8027ef5cbae88b393d1b31205726b"
@@ -3253,6 +3260,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typedi@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/typedi/-/typedi-0.10.0.tgz#e8f9a5ee100b84addbdfb57fe90d8d9ed2a21dea"
+  integrity sha512-v3UJF8xm68BBj6AF4oQML3ikrfK2c9EmZUyLOfShpJuItAqVBHWP/KtpGinkSsIiP6EZyyb6Z3NXyW9dgS9X1w==
 
 typescript@^4.5.5:
   version "4.5.5"
