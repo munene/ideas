@@ -1,0 +1,15 @@
+{
+  "name": "ideas",
+  "version": "1.0.0",
+  "description": "Ideas Test",
+  "repository": "gihub.com/munene/ideas",
+  "author": "munene",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "lib",
+      "api"
+    ]
+  }
+}
