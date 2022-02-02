@@ -15,7 +15,6 @@ export class InMemoryNewsArticleRepository {
    * @memberof InMemoryNewsArticleRepository
    */
   add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): NewsArticle {
-    console.log(newsArticle);
     const newNewsArticle = {...newsArticle, id: uuid(), creation_date: new Date() }
     this.newsArticles.push(newNewsArticle);
     return newNewsArticle;
