@@ -1,7 +1,11 @@
-import {NewsArticleService} from '@ideas/lib';
+import {NewsArticleService, PersistenceModule} from '@ideas/lib';
 
 export class NewsArticleHandler {
-  _persistenceService: NewsArticleService;
+  _newsArticleService: NewsArticleService;
 
-  constructor() {}
+  constructor() {
+    this._newsArticleService = PersistenceModule.getNewsArticleService();
+  }
+
+  
 }
