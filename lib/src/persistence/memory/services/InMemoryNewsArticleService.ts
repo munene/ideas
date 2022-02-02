@@ -1,5 +1,5 @@
 import {Inject, Service} from 'typedi';
-import { ModifyNewsArticleOptions, NewsArticle, NewsArticleService } from '@ideas/lib';
+import { ModifyNewsArticleOptions, NewsArticle, NewsArticleService } from '../../../interfaces';
 import { InMemoryNewsArticleRepository } from '../repositories';
 
 @Service()
