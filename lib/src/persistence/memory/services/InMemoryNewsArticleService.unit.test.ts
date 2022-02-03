@@ -19,7 +19,7 @@ describe('InMemoryNewsArticleService', () => {
   });
 
   describe('add', () => {
-    it('should return a news article', () => {
+    it('should return a news article', async () => {
       const newsArticle = Object.assign(new NewsArticle(), {
         id: 'MOCK_ID',
         creation_date: new Date(),
@@ -27,20 +27,20 @@ describe('InMemoryNewsArticleService', () => {
         text: 'MOCK_TEXT',
       });
   
-      repo.add.returns(newsArticle);
-      const result = repo.add({title: 'MOCK'});
+      repo.add.resolves(newsArticle);
+      const result = await repo.add({title: 'MOCK'});
       expect(result).toEqual(newsArticle);
       expect(repo.add.callCount).toBe(1);
     });
   });
 
   describe('modify', () => {
-    it('should throw NotFoundError if the news article does not exist', () => {
-      repo.modify.throws(new NotFoundError());
-      expect(() => service.modify({id: 'MOCK_ID', newsArticle: {title: 'MOCK'}})).toThrowError(NotFoundError);
+    it('should throw NotFoundError if the news article does not exist', async () => {
+      repo.modify.rejects(new NotFoundError());
+      await expect(() => service.modify({id: 'MOCK_ID', newsArticle: {title: 'MOCK'}})).rejects.toThrowError(NotFoundError);
     });
 
-    it('should call the repo to modify the news article and return the modified news article', () => {
+    it('should call the repo to modify the news article and return the modified news article', async () => {
       const newsArticle = Object.assign(new NewsArticle(), {
         id: 'MOCK_ID',
         creation_date: new Date(),
@@ -48,20 +48,20 @@ describe('InMemoryNewsArticleService', () => {
         text: 'MOCK_TEXT',
       });
   
-      repo.modify.returns(newsArticle);
-      const result = repo.modify({id: 'MOCK_ID', newsArticle: {title: 'MOCK'}});
+      repo.modify.resolves(newsArticle);
+      const result = await repo.modify({id: 'MOCK_ID', newsArticle: {title: 'MOCK'}});
       expect(result).toEqual(newsArticle);
       expect(repo.modify.callCount).toBe(1);
     });
   });
 
   describe('get', () => {
-    it('should throw NotFoundError if the news article does not exist', () => {
-      repo.get.throws(new NotFoundError());
-      expect(() => service.get('MOCK_ID')).toThrowError(NotFoundError);
+    it('should throw NotFoundError if the news article does not exist', async () => {
+      repo.get.rejects(new NotFoundError());
+      await expect(() => service.get('MOCK_ID')).rejects.toThrowError(NotFoundError);
     });
 
-    it('should return the news article', () => {
+    it('should return the news article', async () => {
       const newsArticle = Object.assign(new NewsArticle(), {
         id: 'MOCK_ID',
         creation_date: new Date(),
@@ -69,15 +69,15 @@ describe('InMemoryNewsArticleService', () => {
         text: 'MOCK_TEXT',
       });
   
-      repo.get.returns(newsArticle);
-      const result = repo.get('MOCK_ID');
+      repo.get.resolves(newsArticle);
+      const result = await repo.get('MOCK_ID');
       expect(result).toEqual(newsArticle);
       expect(repo.get.callCount).toBe(1);
     });
   });
 
   describe('list', () => {
-    it('should return a list of news articles', () => {
+    it('should return a list of news articles', async () => {
       const newsArticleList = [
         Object.assign(new NewsArticle(), {
           id: 'MOCK_ID',
@@ -99,8 +99,8 @@ describe('InMemoryNewsArticleService', () => {
         }),
       ];
   
-      repo.list.returns(newsArticleList);
-      const result = repo.list();
+      repo.list.resolves(newsArticleList);
+      const result = await repo.list();
       expect(result).toEqual(newsArticleList);
       expect(repo.list.callCount).toBe(1);
     });

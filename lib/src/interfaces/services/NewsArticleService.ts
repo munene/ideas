@@ -6,8 +6,8 @@ export interface ModifyNewsArticleOptions {
 }
 
 export interface NewsArticleService {
-  add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): NewsArticle;
-  modify(options: ModifyNewsArticleOptions): NewsArticle;
-  get(id: string): NewsArticle;
-  list(): NewsArticle[];
+  add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): Promise<NewsArticle>;
+  modify(options: ModifyNewsArticleOptions): Promise<NewsArticle>;
+  get(id: string): Promise<NewsArticle>;
+  list(): Promise<NewsArticle[]>;
 }

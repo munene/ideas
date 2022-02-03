@@ -7,16 +7,16 @@ export class InMemoryNewsArticleService implements NewsArticleService {
   @Inject(() => InMemoryNewsArticleRepository)
   private readonly inMemoryNewsArticleRepo: InMemoryNewsArticleRepository;
 
-  add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): NewsArticle {
+  add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): Promise<NewsArticle> {
     return this.inMemoryNewsArticleRepo.add(newsArticle);
   }
-  modify(options: ModifyNewsArticleOptions): NewsArticle {
+  modify(options: ModifyNewsArticleOptions): Promise<NewsArticle> {
     return this.inMemoryNewsArticleRepo.modify(options);
   }
-  get(id: string): NewsArticle {
+  get(id: string): Promise<NewsArticle> {
     return this.inMemoryNewsArticleRepo.get(id);
   }
-  list(): NewsArticle[] {
+  list(): Promise<NewsArticle[]> {
     return this.inMemoryNewsArticleRepo.list();
   }
   

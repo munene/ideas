@@ -14,10 +14,10 @@ export class InMemoryNewsArticleRepository {
    * @return {*}  {NewsArticle}
    * @memberof InMemoryNewsArticleRepository
    */
-  add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): NewsArticle {
+  add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): Promise<NewsArticle> {
     const newNewsArticle = {...newsArticle, id: uuid(), creation_date: new Date() }
     this.newsArticles.push(newNewsArticle);
-    return newNewsArticle;
+    return Promise.resolve(newNewsArticle);
   }
 
   /**
@@ -27,21 +27,21 @@ export class InMemoryNewsArticleRepository {
    * @return {*}  {NewsArticle}
    * @memberof InMemoryNewsArticleRepository
    */
-  modify(options: ModifyNewsArticleOptions): NewsArticle {
+  modify(options: ModifyNewsArticleOptions): Promise<NewsArticle> {
     this.newsArticles = this.newsArticles.map(newsArticle => newsArticle.id === options.id ? {...newsArticle, ...options.newsArticle} : newsArticle);
     return this.get(options.id);
   }
 
-  get(id: string): NewsArticle {
+  get(id: string): Promise<NewsArticle> {
     const newsArticle = this.newsArticles.find(newsArticle => newsArticle.id === id);
 
     if(newsArticle) {
-      return newsArticle;
+      return Promise.resolve(newsArticle);
     }
-    throw new NotFoundError();
+    return Promise.reject(new NotFoundError());
   }
 
-  list(): NewsArticle[] {
-    return this.newsArticles;
+  list(): Promise<NewsArticle[]> {
+    return Promise.resolve(this.newsArticles);
   }
 }
