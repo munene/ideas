@@ -1,4 +1,4 @@
-import { NewsArticle } from "../models";
+import { NewsArticle } from "../../models";
 
 export interface ModifyNewsArticleOptions {
   id: string;

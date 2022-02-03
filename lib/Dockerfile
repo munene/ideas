@@ -1,0 +1,8 @@
+FROM postgres:14.1
+
+ENV POSTGRES_DB test
+ENV POSTGRES_USER test
+ENV POSTGRES_PASSWORD test
+
+EXPOSE 5432
+CMD ["postgres"]

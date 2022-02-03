@@ -1,5 +1,6 @@
 
 import 'reflect-metadata';
+import 'dotenv/config';
 
 import {createKoaServer, useContainer} from 'routing-controllers';
 import Container from 'typedi';

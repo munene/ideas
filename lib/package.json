@@ -4,7 +4,9 @@
   "main": "dist/index.js",
   "license": "MIT",
   "dependencies": {
+    "pg": "^8.7.1",
     "typedi": "0.8.0",
+    "typeorm": "^0.2.41",
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
@@ -23,6 +25,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "yarn jest"
+    "test": "yarn jest",
+    "db:create": "docker build -t testing_db .",
+    "db:start": "docker run -it --rm -d --name testing_db -p 5432:5432 testing_db"
   }
 }

@@ -1,7 +1,8 @@
 import { Service } from 'typedi';
 import {v4 as uuid} from 'uuid';
 import { NotFoundError } from '../../errors';
-import { ModifyNewsArticleOptions, NewsArticle } from '../../../interfaces';
+import { ModifyNewsArticleOptions } from '../../../interfaces';
+import { NewsArticle } from '../../../models';
 
 @Service()
 export class InMemoryNewsArticleRepository {
