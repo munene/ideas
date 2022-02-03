@@ -2,7 +2,7 @@ import { NewsArticle } from "../models";
 
 export interface ModifyNewsArticleOptions {
   id: string;
-  newsArticle: Pick<NewsArticle, 'title' | 'text'>;
+  newsArticle: Partial<Pick<NewsArticle, 'title' | 'text'>>;
 }
 
 export interface NewsArticleService {
