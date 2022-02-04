@@ -44,7 +44,8 @@ export class NewsArticleHandler {
     }
   }
 
-  add(data: AddNewsArticleRequest) {
-    return this._newsArticleService.add(data);
+  async add(data: AddNewsArticleRequest) {
+    const article = await this._newsArticleService.add(data);
+    return NewsArticleResponse.from(article);
   }
 }
