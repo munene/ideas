@@ -1,6 +1,6 @@
 import {NewsArticleService, PersistenceModule} from '@ideas/lib';
 import { Service } from 'typedi';
-import { AddNewsArticleRequest, ModifyNewsArticleRequest } from './NewsArticlesSchemas';
+import { AddNewsArticleRequest, ModifyNewsArticleRequest, NewsArticleResponse } from './NewsArticlesSchemas';
 
 @Service()
 export class NewsArticleHandler {
@@ -10,12 +10,14 @@ export class NewsArticleHandler {
     this._newsArticleService = PersistenceModule.getNewsArticleService();
   }
 
-  list() {
-    return this._newsArticleService.list();
+  async list() {
+    const articles = await this._newsArticleService.list();
+    return articles.map(NewsArticleResponse.from);
   }
 
-  get(id: string) {
-    return this._newsArticleService.get(id);
+  async get(id: string) {
+    const article = await this._newsArticleService.get(id);
+    return NewsArticleResponse.from(article);
   }
 
   modify(id: string, data: ModifyNewsArticleRequest) {

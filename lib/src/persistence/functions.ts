@@ -1,7 +1,7 @@
 import Container from "typedi";
 import { NewsArticleService } from "../interfaces";
-import { InMemoryNewsArticleService } from "./memory";
+import { PostgresNewsArticleService } from "./postgres";
 
 export function getNewsArticleService(): NewsArticleService {
-  return Container.get(InMemoryNewsArticleService);
+  return Container.get(PostgresNewsArticleService);
 }

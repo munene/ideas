@@ -1,12 +1,14 @@
-import { Inject, Service } from "typedi";
+import { Service } from "typedi";
 import { NotFoundError } from "../..";
 import { ModifyNewsArticleOptions, NewsArticleService } from '../../../interfaces';
 import { NewsArticle } from "../../../models";
 import { PostgresNewsArticleRepository } from "../repositories";
+import { InjectRepository } from 'typeorm-typedi-extensions';
+import { PostgresNewsArticle } from "../entities";
 
 @Service()
 export class PostgresNewsArticleService implements NewsArticleService {
-  @Inject(() => PostgresNewsArticleRepository)
+  @InjectRepository(() => PostgresNewsArticleRepository)
   private readonly repo: PostgresNewsArticleRepository;
 
   /**
@@ -17,7 +19,8 @@ export class PostgresNewsArticleService implements NewsArticleService {
    * @memberof PostgresNewsArticleService
    */
   add(newsArticle: Pick<NewsArticle, "title" | "text">): Promise<NewsArticle> {
-    return this.repo.save(newsArticle);
+    const article = Object.assign(new PostgresNewsArticle(), newsArticle);
+    return this.repo.save(article);
   }
 
   /**
@@ -52,7 +55,7 @@ export class PostgresNewsArticleService implements NewsArticleService {
    * @return {*}  {Promise<NewsArticle[]>}
    * @memberof PostgresNewsArticleService
    */
-  list(): Promise<NewsArticle[]> {
+  async list(): Promise<NewsArticle[]> {
     return this.repo.find();
   }
 

@@ -1,4 +1,5 @@
 import { NewsArticle } from "@ideas/lib";
+import { Expose } from "class-transformer";
 import { IsOptional, IsString, MinLength } from "class-validator";
 import Container from "typedi";
 
@@ -32,4 +33,25 @@ export class AddNewsArticleRequest {
   @IsString()
   @IsOptional()
   text?: string;
+}
+
+export class NewsArticleResponse extends NewsArticle {
+  @Expose()
+  id: string;
+  @Expose()
+  title: string;
+  @Expose()
+  text: string;
+  @Expose()
+  creation_date: Date;
+
+  
+  static from(data:NewsArticle): NewsArticleResponse {
+    return Object.assign(new NewsArticleResponse(), {
+      id: data.id,
+      title: data.title,
+      text: data.text,
+      creation_date: data.creation_date
+    });
+  }
 }
