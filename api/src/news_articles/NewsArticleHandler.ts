@@ -1,5 +1,6 @@
 import {NewsArticleService, PersistenceModule} from '@ideas/lib';
 import { Service } from 'typedi';
+import { NotFoundHttpError } from '../http_errors/NotFoundHttpError';
 import { AddNewsArticleRequest, ModifyNewsArticleRequest, NewsArticleResponse } from './NewsArticlesSchemas';
 
 @Service()
@@ -16,12 +17,31 @@ export class NewsArticleHandler {
   }
 
   async get(id: string) {
-    const article = await this._newsArticleService.get(id);
-    return NewsArticleResponse.from(article);
+    try {
+      const article = await this._newsArticleService.get(id);
+      return NewsArticleResponse.from(article);
+    } catch (error) {
+      switch((error as any).constructor) {
+        case PersistenceModule.NotFoundError:
+          throw new NotFoundHttpError();
+        default:
+          throw error;
+      }
+    }
   }
 
-  modify(id: string, data: ModifyNewsArticleRequest) {
-    return this._newsArticleService.modify({id, newsArticle: data});
+  async modify(id: string, data: ModifyNewsArticleRequest) {
+    try {
+      const article = await this._newsArticleService.modify({id, newsArticle: data});
+      return NewsArticleResponse.from(article);
+    } catch (error) {
+      switch((error as any).constructor) {
+        case PersistenceModule.NotFoundError:
+          throw new NotFoundHttpError();
+        default:
+          throw error;
+      }
+    }
   }
 
   add(data: AddNewsArticleRequest) {

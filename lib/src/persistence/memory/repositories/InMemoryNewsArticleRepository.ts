@@ -16,7 +16,7 @@ export class InMemoryNewsArticleRepository {
    * @memberof InMemoryNewsArticleRepository
    */
   add(newsArticle: Pick<NewsArticle, 'title' | 'text'>): Promise<NewsArticle> {
-    const newNewsArticle = {...newsArticle, id: uuid(), creation_date: new Date() }
+    const newNewsArticle = Object.assign(new NewsArticle(), {...newsArticle, id: uuid(), creation_date: new Date() })
     this.newsArticles.push(newNewsArticle);
     return Promise.resolve(newNewsArticle);
   }
@@ -29,7 +29,7 @@ export class InMemoryNewsArticleRepository {
    * @memberof InMemoryNewsArticleRepository
    */
   modify(options: ModifyNewsArticleOptions): Promise<NewsArticle> {
-    this.newsArticles = this.newsArticles.map(newsArticle => newsArticle.id === options.id ? {...newsArticle, ...options.newsArticle} : newsArticle);
+    this.newsArticles = this.newsArticles.map(newsArticle => newsArticle.id === options.id ? Object.assign(new NewsArticle(), {...newsArticle, ...options.newsArticle}) : newsArticle);
     return this.get(options.id);
   }
 

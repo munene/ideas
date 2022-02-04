@@ -1,7 +1,6 @@
-import { NewsArticle } from "@ideas/lib";
+import { NewsArticle, Relevance } from "@ideas/lib";
 import { Expose } from "class-transformer";
-import { IsOptional, IsString, MinLength } from "class-validator";
-import Container from "typedi";
+import { IsEnum, IsOptional, IsString, MinLength } from "class-validator";
 
 /**
  * Payload used in the modify news article endpoint
@@ -35,23 +34,29 @@ export class AddNewsArticleRequest {
   text?: string;
 }
 
-export class NewsArticleResponse extends NewsArticle {
+export class NewsArticleResponse {
   @Expose()
   id: string;
+
   @Expose()
   title: string;
+
   @Expose()
   text: string;
+
   @Expose()
   creation_date: Date;
 
+  @Expose()
+  relevance: Relevance;
   
   static from(data:NewsArticle): NewsArticleResponse {
     return Object.assign(new NewsArticleResponse(), {
       id: data.id,
       title: data.title,
       text: data.text,
-      creation_date: data.creation_date
+      creation_date: data.creation_date,
+      relevance: data.relevance,
     });
   }
 }

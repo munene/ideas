@@ -1,3 +1,4 @@
+import { NewsArticle } from "../../..";
 import { NotFoundError } from "../../errors";
 import { InMemoryNewsArticleRepository } from "./InMemoryNewsArticleRepository";
 
@@ -14,24 +15,24 @@ describe('InMemoryNewsArticleRepository', () => {
     jest.restoreAllMocks();
 
     repo['newsArticles'] = [
-      {
+      Object.assign(new NewsArticle(), {
         id: 'MOCK_ID',
         creation_date: new Date(),
         title: 'MOCK_TITLE',
         text: 'MOCK_TEXT',
-      },
-      {
+      }),
+      Object.assign(new NewsArticle(), {
         id: 'MOCK_ID_2',
         creation_date: new Date(),
         title: 'MOCK_TITLE_2',
         text: 'MOCK_TEXT_2',
-      },
-      {
+      }),
+      Object.assign(new NewsArticle(), {
         id: 'MOCK_ID_3',
         creation_date: new Date(),
         title: 'MOCK_TITLE_3',
         text: 'MOCK_TEXT_3',
-      }
+      }),
     ];
   });
 
